@@ -1,0 +1,45 @@
+
+    <header class="header">
+      <section class="header__primary">
+        <a href="#"  class="logo">{{role}}</a>
+        <div class="user-nav">
+              <div class="user-nav__holder">
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Picture" class="user-nav__picture">
+                <span class="user-nav__name">{{username}}</span>
+              </div>
+          <ul class="user-nav__content">
+            <li class="user-nav__item">
+              <a  class="user-nav__item" (click) = "logout()">Log out</a>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="header__secondary">
+        <nav class="navigation">
+          <ul class="navigation__list" [ngSwitch] = role>
+                  <li class="navigation__item">
+                    <a routerLink="dashboard" class="navigation__link">Dashboard</a>
+                  </li>
+                  <li class="navigation__item" *ngSwitchCase = "'ROLE_INSTRUCTOR'">
+                    <a routerLink ="create-question" class="navigation__link">Question Bank</a>
+                  </li>
+                  <li class="navigation__item" *ngSwitchCase = "'ROLE_INSTRUCTOR'">
+                    <a routerLink ="create-exam" class="navigation__link">Make Exam</a>
+                  </li>
+                  <!--<li class="navigation__item" *ngSwitchCase = "'ROLE_INSTRUCTOR'">
+                    <a routerLink = "assign-exam" class="navigation__link">Assign Exam</a>
+                  </li>
+                  <li class="navigation__item" *ngSwitchCase = "'ROLE_INSTRUCTOR'">
+                    <a routerLink ="students" class="navigation__link">Students</a>
+                  </li>-->
+                  
+          </ul>
+        </nav>
+      </section>
+             <nav class="pagination" *ngIf="paginationControl">
+              <button disabled id="pagination__prev" class="btn" type="button">Previous</button>
+              <ul class="pagination__list"></ul>
+              <button id="pagination__next" class="btn" type="button">Next</button>
+            </nav> 
+    </header>
+   

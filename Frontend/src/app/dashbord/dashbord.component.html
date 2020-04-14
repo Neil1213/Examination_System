@@ -1,0 +1,111 @@
+<notifier-container></notifier-container>
+<main class="main" *ngIf="student else instructor">
+<section class="section">
+
+    <header class="section__header">
+  
+      <h1 class="heading-primary">Available Exams</h1>
+  
+    </header>
+  
+    <main class="section__main" id="releasedExams">
+  
+      <ul class="table" id="releasedExamsResult" *ngFor="let exam of availableExams">
+        <li class="table__item">
+            <a [routerLink] = "['../takeExam']" [queryParams]="{examId: exam.id}" class="table__link">
+              <main class="table__content">
+                <div class="table__text-holder">
+                  <p class="table__text table__text--primary">{{exam.name}}</p>
+                  <!--<p class="table__text table__text--secondary">${exam.instructorName}</p>-->
+                </div>
+                <span class="table__score">{{exam.points}}</span>
+              </main>
+            </a>
+          </li>
+      </ul>
+  
+    </main>
+  
+  </section>
+  
+  <section class="section">
+  
+    <header class="section__header">
+  
+      <h1 class="heading-primary">Past Exams</h1>
+  
+    </header>
+  
+    <main class="section__main" id="pastExams">
+  
+      <ul class="table" id="pastExamsResult" *ngFor="let exam of pastExams">
+        <li class="table__item">
+          <a [routerLink] = "['../viewGrades']" [queryParams]="{examId: exam.id}" class="table__link">
+            <main class="table__content">
+              <div class="table__text-holder">
+                <p class="table__text table__text--primary">{{exam.name}}</p>
+              </div>
+              <span class="table__score">{{exam.points}}</span>
+            </main>
+          </a>
+        </li>  
+      </ul>
+  
+    </main>
+  
+  </section>
+</main>
+<ng-template #instructor>
+<main class="main">
+<section class="section">
+    <header class="section__header">
+      <h1 class="heading-primary">Released Exams</h1>
+    </header>
+    <main class="section__main" id="releasedExams">
+      <ul class="table" id="releasedExamsResult" *ngFor="let exam of releasedExams">
+        <li class="table__item">
+            <a href="#" class="table__link">
+              <main class="table__content">
+                <div class="table__text-holder">
+                  <p class="table__text table__text--primary">{{exam.name}}</p>
+                </div>
+                <div class="section__holder">
+                  <label class="input__toggle">
+                    <input class="input__toggle-cb" type="checkbox" (input)="unreleaseExam(exam); ngOnInit()"   name="isReleased" value={{exam.isReleased}} checked >
+                    <span class="input__toggle-slider"></span>
+                  </label>
+                  <span class="table__score">{{exam.points}}</span>
+                </div>
+              </main>
+            </a>
+          </li>
+      </ul>
+    </main>
+  </section>
+  <section class="section">
+    <header class="section__header">
+      <h1 class="heading-primary">Unreleased Exams</h1>
+    </header>
+    <main class="section__main" id="unreleasedExams">
+      <ul class="table" id="unreleasedExamsResult" *ngFor = "let exam of unreleasedExams">
+        <li class="table__item">
+            <a href="#" class="table__link">
+              <main class="table__content">
+                <div class="table__text-holder">
+                  <p class="table__text table__text--primary">{{exam.name}}</p>
+                </div>
+                <div class="section__holder">
+                  <label class="input__toggle">
+                    <input class="input__toggle-cb" (input)="releaseExam(exam); ngOnInit()"  type="checkbox" name="isReleased" value={{exam.isReleased}} >
+                    <span class="input__toggle-slider"></span>
+                  </label>
+                  <span class="table__score">{{exam.points}}</span>
+                </div>
+              </main>
+            </a>
+          </li>
+      </ul>
+    </main>
+  </section>
+  </main>
+  </ng-template>

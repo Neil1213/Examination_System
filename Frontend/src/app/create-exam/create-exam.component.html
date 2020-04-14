@@ -1,0 +1,108 @@
+<notifier-container></notifier-container>
+<main class = "main">
+<section class="section">
+
+    <header class="section__header">
+  
+      <h1 class="heading-primary">{{examName}}</h1>
+      <span class="{{scoreStatus}}">{{examPoints}}</span>
+  
+    </header>
+  
+    <main class="section__main" id="exam">
+  
+      <input type="text" [(ngModel)] = "examName" name="name" class="form__input form__input--full-width" placeholder="Exam name...">
+      <button class="btn btn--full-width" id="makeExam" [disabled] = "isDisabled" (click)="createExam()" type="button">Make Exam</button>
+      
+      <ul class="table" id="examQuestions" *ngFor = "let question of exam">
+        <li class="table__item table__item--nolink">
+            <span class="table__tag table__tag--{{question.difficulty|lowercase}}">{{question.difficulty}}</span>
+            <div class="table__text--holder">
+              <p class="table__text table__text--primary">{{question.methodName}}</p>
+            </div>
+            <input type="number"[(ngModel)]="question.points" #points = "ngModel" (input)="updateQuestionPoints($event, question)" class="table__input--score" value = "{{question.points}}" placeholder="Score">
+          </li>
+      </ul>
+      
+    </main>
+  
+  </section>
+  <section class="section">
+  
+    <header class="section__header">
+  
+      <h1 class="heading-primary">Question Bank</h1>
+  
+    
+      <form class="form" id="questionBankFilter" method="POST">
+        
+        <div class="form__holder form__holder--radio">
+          
+          <div class="form__holder form__holder--radio">
+          
+            <input type="radio" id="search__easy" value="EASY" name="difficulty" class="form__radio" />
+          
+            <label for="search__easy" class="form__label--radio form__label--radio-green">Easy</label>
+          
+          </div>
+          
+          <div class="form__holder form__holder--radio">
+          
+            <input type="radio" id="search__medium" value="MEDIUM" name="difficulty" class="form__radio" />
+          
+            <label for="search__medium" class="form__label--radio form__label--radio-orange">Medium</label>
+          
+          </div>
+          
+          <div class="form__holder form__holder--radio">
+          
+            <input type="radio" id="search__hard" value="HARD" name="difficulty" class="form__radio" />
+            
+            <label for="search__hard" class="form__label--radio form__label--radio-red">Hard</label>
+         
+          </div>
+  
+        </div>
+        
+        <div class="form__holder form__holder--submit">
+          
+          <div class="form__select">
+            <select name="category">
+              <option>Categories</option>
+              <option value="loop">Loops</option>
+              <option value="method">Method</option>
+              <option value="string">Strings</option>
+              <option value="dict">Dictionary</option>
+              <option value="list">Lists</option>
+              <option value="def">Def</option>
+            </select>
+          </div>
+          
+          <input type="text" name="keyword" class="form__input" placeholder="Keyword..." /> 
+          
+        </div>
+        
+      </form>
+  
+    </header>
+  
+    <main class="section__main" id="questionBank">
+      
+      <ul class="table" id="questionBankResults" *ngFor="let question of questionBank;">
+        <li class="table__item table__item--question" (click) = "getQuestion(question)">
+            <div class="table__text--holder">
+                <p style="display:none;">{{question.id}}</p>
+                <p class="table__text table__text--primary">{{question.methodName}}</p>
+                <p class="table__text table__text--secondary">{{question.question}}</p>
+            </div>
+        </li>
+      </ul>
+      
+    
+    </main>
+  
+  </section>
+  
+  
+  
+  </main>

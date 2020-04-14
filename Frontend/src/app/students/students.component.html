@@ -1,0 +1,52 @@
+<main class="main">
+    <section class="section">
+        <header class="section__header">
+          <h1 class="heading-primary">Exams</h1>
+        </header>
+        <main class="section__main" id="releasedExams">
+          <ul class="table" id="releasedExamsResult" *ngFor="let exam of Exams">
+            <li class="table__item">
+                <a href="typescript:showStudents(exam.id)" (click)="showStudents(exam.id)" class="table__link">
+                  <main class="table__content">
+                    <div class="table__text-holder">
+                      <p class="table__text table__text--primary">{{exam.name}}</p>
+                    </div>
+                    <div class="section__holder">
+                      <label class="input__toggle">
+                        <input class="input__toggle-cb" type="checkbox"  (input)="showStudents(exam.id)"   >
+                        <span class="input__toggle-slider"></span>
+                      </label>
+                      <span class="table__score">{{exam.points}}</span>
+                    </div>
+                  </main>
+                </a>
+              </li>
+          </ul>
+        </main>
+      </section>
+      <section class="section">
+        <header class="section__header">
+          <h1 class="heading-primary">Students</h1>
+        </header>
+        <main class="section__main" id="unreleasedExams" >
+          <ul class="table" id="unreleasedExamsResult" *ngFor="let data of Students">
+            <li class="table__item">
+                <a href="#" class="table__link">
+                  <main class="table__content">
+                    <div class="table__text-holder">
+                      <p class="table__text table__text--primary">{{data.user.username}}</p>
+                    </div>
+                    <div class="section__holder">
+                      <label class="input__toggle">
+                        <input class="input__toggle-cb"   type="checkbox" name="isReleased">
+                        <span class="input__toggle-slider"></span>
+                      </label>
+                      <span class="table__score">{{data.grade}}</span>
+                    </div>
+                  </main>
+                </a>
+              </li>
+          </ul>
+        </main>
+      </section>
+      </main>

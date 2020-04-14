@@ -1,0 +1,38 @@
+
+<nav class = "pagination">
+    <button (click)="setPage(pager.currentPage - 1)" [disabled]="pager.currentPage === 1" id="pagination__prev" class="btn" type="button">Previous</button>
+    <ul *ngIf="pager.pages && pager.pages.length" class="pagination__list">
+        
+        <li *ngFor="let page of pager.pages" [ngClass] ="{'pagination__item' : true, 'pagination__item--active':pager.currentPage == page}">
+            {{page}}
+        </li>
+    </ul>
+    <button  (click)="addResponses(); setPage(pager.currentPage + 1)" id="pagination__next" class="btn" type="button">Next</button>
+
+    <button  id = "pagination__next" (click)="submitExam()"  class="btn" type="button">Submit</button>
+    
+</nav>
+<main class="main" *ngFor="let question of pagedItems">
+    <section class="section" id="examQuestion" >
+        <header class="section__header">
+            <div class="section__holder">
+                <h1 class="heading-primary">{{questions[cPage].question.methodName}}</h1>
+            </div>
+            <span class="section__score section__score--green">{{questions[cPage].points}}</span>
+         </header>
+         <main class="section__main">
+            <div class="card">
+              {{questions[cPage].question.question}}
+            </div>
+            <div style="padding:15px;"class="section__code" *ngFor="let testcase of question.question.testcases">
+                  {{testcase.testcase}} ---> {{testcase.answer}}
+                
+            </div>
+          </main>
+    </section> 
+    <section class="section" id="studentResponse">
+        <main class="section__main">
+            <textarea id="feedback__textarea"[(ngModel)]="questions[cPage].response" #response = "ngModel" name="definition" cols="30" rows="25" class="form__textarea form__textarea--full-width" placeholder="Enter Feedback for question...">{{questions[cPage].response}}</textarea>
+        </main>
+    </section>
+</main>
